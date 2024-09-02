@@ -13,4 +13,4 @@ The repository contains some basic STM32 projects using the libopencm3 library.
 ## Board: NUCLEO-F446RE (STM32F446RE)
 * [Datasheet](./datasheet/stm32f446re.pdf)
 
-![NUCLEO-F446RE (STM32F446RE)](./img/STM32F446RE.jpg)
+![NUCLEO-F446RE (STM32F446RE)](./img/STM32F446RE.png)

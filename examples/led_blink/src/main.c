@@ -1,5 +1,6 @@
 #include <libopencm3/stm32/rcc.h>
 #include <libopencm3/stm32/gpio.h>
+#include "timer_func.h"
 
 #if defined(NUCLEO_F446RE)
   #define RCC_LED_GPIO  (RCC_GPIOA)   // Reset and Clock Control (RCC) port
@@ -8,8 +9,6 @@
 #else
   #error "Your STM32 board is not NUCLEO-F446RE!"
 #endif
-
-static void delay(uint32_t value);
 
 int main(void)
 {
@@ -26,16 +25,9 @@ int main(void)
     gpio_toggle(GPIO_LED_PORT, GPIO_LED_PIN);
     
     // 2000000 / GPIO_OSPEED_2MHZ = 1Hz
-    delay(2000000);
+    timer_delay(2000000, GPIO_OSPEED_2MHZ);
   }
 
   return 0;
 }
 
-static void delay(uint32_t value)
-{
-  for(uint32_t i = 0; i < value; i++)
-  {
-    __asm__("nop");
-  }
-}

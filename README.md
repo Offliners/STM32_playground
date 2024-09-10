@@ -3,8 +3,9 @@ The repository contains some basic STM32 projects using the libopencm3 library.
 
 [Libopencm3](https://github.com/libopencm3/libopencm3) is open source ARM Cortex-M microcontroller library.
 
+
 ## Examples
-* [Led Blink](./examples/led_blink/src/main.c)
+* [Led Blink](./examples/led_blink/README.md)
 
 ## IDE
 * VSCode
@@ -12,5 +13,6 @@ The repository contains some basic STM32 projects using the libopencm3 library.
 
 ## Board: NUCLEO-F446RE (STM32F446RE)
 * [Datasheet](./datasheet/stm32f446re.pdf)
+* [Reference Manual](./datasheet/RM0390_reference_manual.pdf)
 
 ![NUCLEO-F446RE (STM32F446RE)](./img/STM32F446RE.png)

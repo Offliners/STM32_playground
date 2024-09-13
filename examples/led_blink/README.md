@@ -14,7 +14,7 @@ First, locate the base address of AHB1 in the memory map.
 
 ![AHB1 addr](./img/AHB1_addr.png)
 
-### GPIOA
+### GPIOA Address
 Next, find the address of GPIOA in AHB1.
 
 ```c
@@ -24,4 +24,7 @@ Next, find the address of GPIOA in AHB1.
 
 ![GPIOA addr](./img/GPIOA_addr.png)
 
-### GPIO Configuration
+### GPIOA Register
+
+
+![GPIOA Register](./img/GPIOA_reg.png)

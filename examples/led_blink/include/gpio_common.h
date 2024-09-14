@@ -4,6 +4,7 @@
 #include "memorymap.h"
 
 #define GPIOA_OFFSET    (0x00000000)
+#define GPIOC_OFFSET    (0x00000800)
 #define GPIOA           GET_ADDR(PERIPHERAL_AHB1_BASE + GPIOA_OFFSET)
 
 // GPIOx_MODER (0x00)
@@ -45,7 +46,7 @@
 #define CLEAR_GPIOX_OSPEEDR(gpiox, pin)         WRITE_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET, READ_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET) & CLEAR_OSPEEDR(pin))
 #define SET_OSPEEDR(pin, speed)                 ((speed) << (2 * (pin)))
 #define SET_GPIOX_OSPEEDR(gpiox, pin, speed)    WRITE_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET, READ_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET) | SET_OSPEEDR(pin, speed))
-#define GET_SPEEDR(gpiox, pin)                  ((READ_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET) & (0x11 << (2 * (pin)))) >> (2 * (pin)))
+#define GET_SPEEDR(gpiox, pin)                  ((READ_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET) >> (2 * (pin))) & 0x11)
 
 
 // GPIOx_PUPDR (0x0C)
@@ -64,7 +65,7 @@
 
 
 // GPIOx_ODR (0x14)
-#define GPIO_ODR_OFFSET             0x14
+#define GPIO_ODR_OFFSET           0x14
 
 
 // GPIO set/clear/toggle

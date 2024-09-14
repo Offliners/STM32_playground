@@ -43,6 +43,8 @@ int main(void)
 
     // time delay (unit: ms)
     u08Ret |= timer_delay(1000, GET_SPEEDR(GPIO_LED_PORT, PIN5));
+    if(u08Ret)
+      break;
   }
 
   return u08Ret;

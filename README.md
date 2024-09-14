@@ -13,4 +13,6 @@ The repository contains some basic STM32 projects using my own library.
 * [Datasheet](./datasheet/stm32f446re.pdf)
 * [Reference Manual](./datasheet/RM0390_reference_manual.pdf)
 
-![NUCLEO-F446RE (STM32F446RE)](./img/STM32F446RE.png)
+<p align='center'>
+    <img src="./img/STM32F446RE.png" width="50%" />
+</p>

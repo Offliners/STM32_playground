@@ -1,5 +1,20 @@
-## Led blink
+## Led Blink
 This example toggles GPIOA to make the LED on the STM32 board blink every second
+
+### Led 2
+Because we want to blink LED2, we can find from the Reference Manual (UM1724) that LED2 corresponds to PA5 (Port A, Pin 5).
+
+![Led 2](./img/led2_PA5.png)
+
+```c
+#if defined(NUCLEO_F446RE)
+  #define RCC_LED_GPIO  (RCC_GPIOA)   // Reset and Clock Control (RCC) port
+  #define GPIO_LED_PORT (GPIOA)       // General Purpose Input Output (GPIO) port
+  #define PIN5          (5)           // General Purpose Input Output (GPIO) pin
+#else
+  #error "Your STM32 board is not NUCLEO-F446RE!"
+#endif
+```
 
 ### Memory Map
 First, locate the base address of AHB1 in the memory map.

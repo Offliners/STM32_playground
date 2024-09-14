@@ -92,7 +92,7 @@ Initialize OSPEED of GPIOA, then set OSPEED5 (pin5) to low speed (2MHz).
 #define CLEAR_GPIOX_OSPEEDR(gpiox, pin)         WRITE_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET, READ_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET) & CLEAR_OSPEEDR(pin))
 #define SET_OSPEEDR(pin, speed)                 ((speed) << (2 * (pin)))
 #define SET_GPIOX_OSPEEDR(gpiox, pin, speed)    WRITE_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET, READ_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET) | SET_OSPEEDR(pin, speed))
-#define GET_SPEEDR(gpiox, pin)                  ((READ_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET) & (0x11 << (2 * (pin)))) >> (2 * (pin)))
+#define GET_OSPEEDR(gpiox, pin)                 ((READ_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET) >> (2 * (pin))) & 0x11)
 
 CLEAR_GPIOX_OSPEEDR(GPIO_LED_PORT, PIN5);
 SET_GPIOX_OSPEEDR(GPIO_LED_PORT, PIN5, LOW_SPEED_2MHZ);

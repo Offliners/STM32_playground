@@ -67,6 +67,10 @@ Set OTYPER5 (pin5) to output push-pull.
 ![GPIO OTYPER Register](./img/GPIOA_otyper.png)
 
 ```c
+#define GPIO_OTYPER_OFFSET          0x04
+#define OUTPUT_PUSH_PULL            0x0
+#define OUTPUT_OPEN_DRAIN           0x1
+
 #define SET_GPIOX_OTYPER_PP(gpiox, pin)     WRITE_REG_LWORD(GPIOA, GPIO_OTYPER_OFFSET, READ_REG_LWORD(gpiox, GPIO_OTYPER_OFFSET) & (~(OUTPUT_PUSH_PULL << (pin))))
 
 SET_GPIOX_OTYPER_PP(GPIO_LED_PORT, PIN5);

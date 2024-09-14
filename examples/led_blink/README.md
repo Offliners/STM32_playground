@@ -46,8 +46,41 @@ CLEAR_GPIOX_MODER(GPIO_LED_PORT, PIN5);
 SET_GPIOX_MODER(GPIO_LED_PORT, PIN5, GENERAL_PURPOSE_OUTPUT_MODE);
 ```
 
+### GPIO Register - OTYPER
+Set OTYPER5 (pin5) to output push-pull.
+
+![GPIO OTYPER Register](./img/GPIOA_otyper.png)
+
+```c
+#define SET_GPIOX_OTYPER_PP(gpiox, pin)     WRITE_REG_LWORD(GPIOA, GPIO_OTYPER_OFFSET, READ_REG_LWORD(gpiox, GPIO_OTYPER_OFFSET) & (~(OUTPUT_PUSH_PULL << (pin))))
+
+SET_GPIOX_OTYPER_PP(GPIO_LED_PORT, PIN5);
+```
+
+### GPIO Register - OSPEED
+Initialize OSPEED of GPIOA, then set OSPEED5 (pin5) to low speed (2MHz).
+
+![GPIO OSPEED Register](./img/GPIOA_ospeed.png)
+
+```c
+#define GPIO_OSPEEDR_OFFSET         0x08
+#define LOW_SPEED_2MHZ              0x00
+#define MEDIUM_SPEED_25MHZ          0x01
+#define FAST_SPEED_50MHZ            0x10
+#define HIGH_SPEED_100MHZ           0x11
+
+#define CLEAR_OSPEEDR(pin)                      (~((0x11) << (2 * (pin))))
+#define CLEAR_GPIOX_OSPEEDR(gpiox, pin)         WRITE_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET, READ_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET) & CLEAR_OSPEEDR(pin))
+#define SET_OSPEEDR(pin, speed)                 ((speed) << (2 * (pin)))
+#define SET_GPIOX_OSPEEDR(gpiox, pin, speed)    WRITE_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET, READ_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET) | SET_OSPEEDR(pin, speed))
+#define GET_SPPEDR(gpiox, pin)                  ((READ_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET) & (0x11 << (2 * (pin)))) >> (2 * (pin)))
+
+CLEAR_GPIOX_OSPEEDR(GPIO_LED_PORT, PIN5);
+SET_GPIOX_OSPEEDR(GPIO_LED_PORT, PIN5, LOW_SPEED_2MHZ);
+```
+
 ### GPIO Register - PUDER
-Initialize PUDER of GPIOA, then set MODER5 (pin5) to General purpose output mode.
+Initialize PUDER of GPIOA, then set PUDER5 (pin5) to General purpose output mode.
 
 ![GPIOA PUDER Register](./img/GPIOA_puder_reg.png)
 

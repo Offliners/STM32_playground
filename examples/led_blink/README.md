@@ -1,7 +1,7 @@
 ## Led Blink
 This example toggles Led2 on the STM32 board blink every second
 
-### Led 2
+### LED
 Because we want to blink LED2, we can find from the Reference Manual (UM1724) that LED2 corresponds to PA5 (Port A, Pin 5).
 
 ![Led 2](./img/led2_PA5.png)
@@ -88,7 +88,7 @@ Initialize OSPEED of GPIOA, then set OSPEED5 (pin5) to low speed (2MHz).
 #define CLEAR_GPIOX_OSPEEDR(gpiox, pin)         WRITE_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET, READ_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET) & CLEAR_OSPEEDR(pin))
 #define SET_OSPEEDR(pin, speed)                 ((speed) << (2 * (pin)))
 #define SET_GPIOX_OSPEEDR(gpiox, pin, speed)    WRITE_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET, READ_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET) | SET_OSPEEDR(pin, speed))
-#define GET_SPPEDR(gpiox, pin)                  ((READ_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET) & (0x11 << (2 * (pin)))) >> (2 * (pin)))
+#define GET_SPEEDR(gpiox, pin)                  ((READ_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET) & (0x11 << (2 * (pin)))) >> (2 * (pin)))
 
 CLEAR_GPIOX_OSPEEDR(GPIO_LED_PORT, PIN5);
 SET_GPIOX_OSPEEDR(GPIO_LED_PORT, PIN5, LOW_SPEED_2MHZ);
@@ -188,5 +188,5 @@ BYTE timer_delay(LWORD u32_time_ms, BYTE u08_speed)
     return FUNC_SUCCESS;
 }
 
-u08Ret |= timer_delay(1000, GET_SPPEDR(GPIO_LED_PORT, PIN5));
+u08Ret |= timer_delay(1000, GET_SPEEDR(GPIO_LED_PORT, PIN5));
 ```

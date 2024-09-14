@@ -134,6 +134,14 @@ Enable RCC GPIOA.
 ```
 
 ## Delay Function
+Adjust the delay time according to the value set in GPIOx_OSPEEDR.
+
+|GPIOx_OSPEEDR|Definition|Frequency|
+|-|-|-|
+|00|Low speed|2MHz|
+|01|Medium speed|25MHz|
+|10|Fast speed|50MHz|
+|11|High speed|100MHz|
 
 ```c
 BYTE timer_delay(LWORD time_ms, BYTE speed)

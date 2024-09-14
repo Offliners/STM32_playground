@@ -4,6 +4,7 @@ The repository contains some basic STM32 projects using my own library.
 
 ## Examples
 * [Led Blink](./examples/led_blink/README.md)
+* [Led Control by Button](./examples/led_control_by_button/README.md)
 
 ## IDE
 * VSCode

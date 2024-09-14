@@ -144,6 +144,10 @@ Adjust the delay time according to the value set in GPIOx_OSPEEDR.
 |11|High speed|100MHz|
 
 ```c
+#include "typedef.h"
+#include "gpio_common.h"
+#include "timer_func.h"
+
 BYTE timer_delay(LWORD time_ms, BYTE speed)
 {
     LWORD delay_time_us = 0;
@@ -153,13 +157,13 @@ BYTE timer_delay(LWORD time_ms, BYTE speed)
             delay_time_us = time_ms * 2000000 / 1000;
             break;
         case MEDIUM_SPEED_25MHZ:
-            delay_time_us = time_ms * 2500000 / 1000;
+            delay_time_us = time_ms * 25000000 / 1000;
             break;
         case FAST_SPEED_50MHZ:
-            delay_time_us = time_ms * 5000000 / 1000;
+            delay_time_us = time_ms * 50000000 / 1000;
             break;
         case HIGH_SPEED_100MHZ:
-            delay_time_us = time_ms * 10000000 / 1000;
+            delay_time_us = time_ms * 100000000 / 1000;
             break;
         default:
             return FUNC_FAIL;

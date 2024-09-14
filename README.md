@@ -1,7 +1,5 @@
 # STM32 playground
-The repository contains some basic STM32 projects using the libopencm3 library. 
-
-[Libopencm3](https://github.com/libopencm3/libopencm3) is open source ARM Cortex-M microcontroller library.
+The repository contains some basic STM32 projects using my own library.
 
 
 ## Examples

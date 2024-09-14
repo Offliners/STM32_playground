@@ -12,6 +12,9 @@ find from the Reference Manual (UM1724) that button corresponds to PC13 (Port C,
 #define PIN13             (13)
 ```
 
+When the button (B1 USER) is pressed, the PC13 will get low voltage.
+![Push-button PC13](./img/PC13_button.png)
+
 ## GPIOA Configuration
 Same as [Example 1 - Led Blink](../led_blink/README.md)
 

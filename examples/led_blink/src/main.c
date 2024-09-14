@@ -1,4 +1,4 @@
-#include <libopencm3/stm32/rcc.h>
+#include "rcc_common.h"
 #include "gpio_common.h"
 #include "timer_func.h"
 
@@ -13,19 +13,20 @@
 int main(void)
 {
   // Enable clock
-  rcc_periph_clock_enable(RCC_LED_GPIO);
+  RCC_GPIOA_ENABLE(RCC_LED_GPIO);
 
+  // Initial GPIO
   RESET_GPIOA_MODER();
   RESET_GPIOA_PUDER();
 
-  // Initial GPIO
+  // GPIOA & Pin5 settings
   CLEAR_GPIOX_MODER(GPIO_LED_PORT, PIN5);
   SET_GPIOX_MODER(GPIO_LED_PORT, PIN5, GENERAL_PURPOSE_OUTPUT_MODE);
   CLEAR_GPIOX_PUPDR(GPIO_LED_PORT, PIN5);
   SET_GPIOX_PUPDR(GPIO_LED_PORT, PIN5, NO_PULL_UP_PULL_DOWN);
 
   // Led starts blinking
-  while(true)
+  while(1)
   {
     // toggle led2 
     TOGGLE_GPIOX(GPIO_LED_PORT, PIN5);
@@ -34,5 +35,5 @@ int main(void)
     timer_delay(2000000);
   }
 
-  return 0;
+  return FUNC_SUCCESS;
 }

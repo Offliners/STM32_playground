@@ -3,7 +3,7 @@
 
 #define GET_ADDR(x) (x)
 #define READ_REG_BYTE(addr, offset)         (*((volatile BYTE*)GET_ADDR(addr + offset)))
-#define WRITE_REG_LWORD(addr, offset, val)   ((*((volatile BYTE*)GET_ADDR(addr + offset)))=(val))
+#define WRITE_REG_BYTE(addr, offset, val)   ((*((volatile BYTE*)GET_ADDR(addr + offset)))=(val))
 #define READ_REG_WORD(addr, offset)         (*((volatile WORD*)GET_ADDR(addr + offset)))
 #define WRITE_REG_WORD(addr, offset, val)   ((*((volatile WORD*)GET_ADDR(addr + offset)))=(val))
 #define READ_REG_LWORD(addr, offset)         (*((volatile LWORD*)GET_ADDR(addr + offset)))

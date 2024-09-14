@@ -3,6 +3,6 @@
 
 #include "typedef.h"
 
-void timer_delay(LWORD time_us);
+BYTE timer_delay(LWORD time_ms, BYTE speed);
 
 #endif

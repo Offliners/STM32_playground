@@ -12,18 +12,27 @@
 
 int main(void)
 {
+  BYTE u08Ret = FUNC_SUCCESS;
+
   // Enable clock
   RCC_GPIOA_ENABLE(RCC_LED_GPIO);
 
-  // Initial GPIO
-  RESET_GPIOA_MODER();
-  RESET_GPIOA_PUDER();
-
   // GPIOA & Pin5 settings
+  // GPIO MODER
   CLEAR_GPIOX_MODER(GPIO_LED_PORT, PIN5);
   SET_GPIOX_MODER(GPIO_LED_PORT, PIN5, GENERAL_PURPOSE_OUTPUT_MODE);
+  
+  // GPIO SPEEDR
+  CLEAR_GPIOX_OSPEEDR(GPIO_LED_PORT, PIN5);
+  SET_GPIOX_OSPEEDR(GPIO_LED_PORT, PIN5, LOW_SPEED_2MHZ);
+  
+  // GPIO OTYPER
+  SET_GPIOX_OTYPER_PP(GPIO_LED_PORT, PIN5);
+
+  // GPIO PUDER
   CLEAR_GPIOX_PUPDR(GPIO_LED_PORT, PIN5);
   SET_GPIOX_PUPDR(GPIO_LED_PORT, PIN5, NO_PULL_UP_PULL_DOWN);
+
 
   // Led starts blinking
   while(1)
@@ -31,9 +40,9 @@ int main(void)
     // toggle led2 
     TOGGLE_GPIOX(GPIO_LED_PORT, PIN5);
 
-    // 2000000 / GPIO_OSPEED_2MHZ = 1Hz
-    timer_delay(2000000);
+    // time delay (unit: ms)
+    u08Ret |= timer_delay(1000, GET_SPPEDR(GPIO_LED_PORT, PIN5));
   }
 
-  return FUNC_SUCCESS;
+  return u08Ret;
 }

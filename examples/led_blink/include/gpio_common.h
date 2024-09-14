@@ -45,7 +45,7 @@
 #define CLEAR_GPIOX_OSPEEDR(gpiox, pin)         WRITE_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET, READ_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET) & CLEAR_OSPEEDR(pin))
 #define SET_OSPEEDR(pin, speed)                 ((speed) << (2 * (pin)))
 #define SET_GPIOX_OSPEEDR(gpiox, pin, speed)    WRITE_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET, READ_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET) | SET_OSPEEDR(pin, speed))
-#define GET_SPPEDR(gpiox, pin)                  ((READ_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET) & (0x11 << (2 * (pin)))) >> (2 * (pin)))
+#define GET_SPEEDR(gpiox, pin)                  ((READ_REG_LWORD(gpiox, GPIO_OSPEEDR_OFFSET) & (0x11 << (2 * (pin)))) >> (2 * (pin)))
 
 
 // GPIOx_PUPDR (0x0C)
@@ -64,7 +64,7 @@
 
 
 // GPIOx_ODR (0x14)
-#define GPIO_ODR_OFFSET           0x14
+#define GPIO_ODR_OFFSET             0x14
 
 
 // GPIO set/clear/toggle

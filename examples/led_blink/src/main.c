@@ -1,3 +1,4 @@
+#include "typedef.h"
 #include "rcc_common.h"
 #include "gpio_common.h"
 #include "timer_func.h"
@@ -41,7 +42,7 @@ int main(void)
     TOGGLE_GPIOX(GPIO_LED_PORT, PIN5);
 
     // time delay (unit: ms)
-    u08Ret |= timer_delay(1000, GET_SPPEDR(GPIO_LED_PORT, PIN5));
+    u08Ret |= timer_delay(1000, GET_SPEEDR(GPIO_LED_PORT, PIN5));
   }
 
   return u08Ret;

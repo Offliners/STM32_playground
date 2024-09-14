@@ -133,7 +133,7 @@ Enable RCC GPIOA.
 #define RCC_GPIOA_DISABLE(gpiox)    WRITE_REG_LWORD(RCC, RCC_AHB1ENR_OFFSET, READ_REG_LWORD(RCC, RCC_AHB1ENR_OFFSET) & (~(GPIOX_ENABLE << RCC_GPIOX_TABLE[RCC_GPIOA])))
 ```
 
-## Delay Function
+## Time Delay Function
 Adjust the delay time according to the value set in GPIOx_OSPEEDR.
 
 |GPIOx_OSPEEDR|Definition|Frequency|
@@ -144,10 +144,6 @@ Adjust the delay time according to the value set in GPIOx_OSPEEDR.
 |11|High speed|100MHz|
 
 ```c
-#include "typedef.h"
-#include "gpio_common.h"
-#include "timer_func.h"
-
 BYTE timer_delay(LWORD time_ms, BYTE speed)
 {
     LWORD delay_time_us = 0;

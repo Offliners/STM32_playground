@@ -1,5 +1,5 @@
 ## Led Blink
-This example toggles GPIOA to make the LED on the STM32 board blink every second
+This example toggles Led2 on the STM32 board blink every second
 
 ### Led 2
 Because we want to blink LED2, we can find from the Reference Manual (UM1724) that LED2 corresponds to PA5 (Port A, Pin 5).

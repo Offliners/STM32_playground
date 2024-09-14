@@ -26,7 +26,7 @@ int main(void)
   // GPIO OTYPER
   SET_GPIOX_OTYPER_PP(GPIO_LED_PORT, PIN5);
 
-  // GPIO SPEEDR
+  // GPIO OSPEEDR
   CLEAR_GPIOX_OSPEEDR(GPIO_LED_PORT, PIN5);
   SET_GPIOX_OSPEEDR(GPIO_LED_PORT, PIN5, LOW_SPEED_2MHZ);
 
@@ -42,7 +42,7 @@ int main(void)
     TOGGLE_GPIOX(GPIO_LED_PORT, PIN5);
 
     // time delay (unit: ms)
-    u08Ret |= timer_delay(1000, GET_SPEEDR(GPIO_LED_PORT, PIN5));
+    u08Ret |= timer_delay(1000, GET_OSPEEDR(GPIO_LED_PORT, PIN5));
     if(u08Ret)
       break;
   }

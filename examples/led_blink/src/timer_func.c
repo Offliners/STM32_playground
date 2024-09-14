@@ -2,10 +2,10 @@
 #include "gpio_common.h"
 #include "timer_func.h"
 
-BYTE timer_delay(LWORD u32_time_ms, BYTE u08_speed)
+BYTE timer_delay(LWORD u32_time_ms, BYTE u08_ospeedr)
 {
     LWORD u32_delay_time_us = 0;
-    switch(u08_speed)
+    switch(u08_ospeedr)
     {
         case LOW_SPEED_2MHZ:
             u32_delay_time_us = u32_time_ms * 2000000 / 1000;

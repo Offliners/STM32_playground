@@ -95,7 +95,7 @@ SET_GPIOX_OSPEEDR(GPIO_LED_PORT, PIN5, LOW_SPEED_2MHZ);
 ```
 
 ### GPIO Register - PUDER
-Initialize PUDER of GPIOA, then set PUDER5 (pin5) to General purpose output mode.
+Initialize PUDER of GPIOA, then set PUDER5 (pin5) to No pull-up, pull down.
 
 ![GPIOA PUDER Register](./img/GPIOA_puder_reg.png)
 
@@ -146,6 +146,8 @@ Enable RCC GPIOA.
 ```c
 #define RCC_GPIOX_ENABLE(gpiox)     WRITE_REG_LWORD(RCC, RCC_AHB1ENR_OFFSET, READ_REG_LWORD(RCC, RCC_AHB1ENR_OFFSET) | (GPIOX_ENABLE << RCC_GPIOX_TABLE[gpiox]))
 #define RCC_GPIOX_DISABLE(gpiox)    WRITE_REG_LWORD(RCC, RCC_AHB1ENR_OFFSET, READ_REG_LWORD(RCC, RCC_AHB1ENR_OFFSET) & (~(GPIOX_ENABLE << RCC_GPIOX_TABLE[gpiox])))
+
+RCC_GPIOX_ENABLE(RCC_LED_GPIO);
 ```
 
 ## Time Delay Function
@@ -159,10 +161,10 @@ Adjust the delay time according to the value set in GPIOx_OSPEEDR.
 |11|High speed|100MHz|
 
 ```c
-BYTE timer_delay(LWORD u32_time_ms, BYTE u08_speed)
+BYTE timer_delay(LWORD u32_time_ms, BYTE u08_ospeedr)
 {
     LWORD u32_delay_time_us = 0;
-    switch(u08_speed)
+    switch(u08_ospeedr)
     {
         case LOW_SPEED_2MHZ:
             u32_delay_time_us = u32_time_ms * 2000000 / 1000;
@@ -188,5 +190,5 @@ BYTE timer_delay(LWORD u32_time_ms, BYTE u08_speed)
     return FUNC_SUCCESS;
 }
 
-u08Ret |= timer_delay(1000, GET_SPEEDR(GPIO_LED_PORT, PIN5));
+u08Ret |= timer_delay(1000, GET_OSPEEDR(GPIO_LED_PORT, PIN5));
 ```

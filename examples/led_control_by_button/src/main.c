@@ -33,8 +33,8 @@ int main(void)
   
   while(1)
   {
-    BYTE is_pressed = (GET_GPIOX_IDR(GPIO_BUTTON_PORT, PIN13) == PRESSED);
-    if(is_pressed)
+    BYTE u08_is_pressed = (GET_GPIOX_IDR(GPIO_BUTTON_PORT, PIN13) == PRESSED);
+    if(u08_is_pressed)
       SET_GPIOX(GPIO_LED_PORT, PIN5);
     else
       CLEAR_GPIOX(GPIO_LED_PORT, PIN5);

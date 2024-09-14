@@ -58,8 +58,8 @@ Read GPIOx_IDR to detect whether the button is pressed.
 #define GPIO_IDR_OFFSET             0x10
 #define GET_GPIOX_IDR(gpiox, pin)           ((READ_REG_LWORD(gpiox, GPIO_IDR_OFFSET)) & (0x1 << (pin)))
 
-BYTE is_pressed = (GET_GPIOX_IDR(GPIO_BUTTON_PORT, PIN13) == PRESSED);
-if(is_pressed)
+BYTE u08_is_pressed = (GET_GPIOX_IDR(GPIO_BUTTON_PORT, PIN13) == PRESSED);
+if(u08_is_pressed)
     SET_GPIOX(GPIO_LED_PORT, PIN5);
 else
     CLEAR_GPIOX(GPIO_LED_PORT, PIN5);

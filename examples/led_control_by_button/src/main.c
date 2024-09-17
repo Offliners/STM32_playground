@@ -24,11 +24,9 @@ int main(void)
   BYTE u08Ret = FUNC_SUCCESS;
 
   // PA5 settings
-  RCC_GPIOX_ENABLE(RCC_LED_GPIO);
   led_init();
 
   // PC13 settings
-  RCC_GPIOX_ENABLE(RCC_BUTTON_GPIO);
   button_init();
   
   while(1)
@@ -45,6 +43,9 @@ int main(void)
 
 static void led_init(void)
 {
+  // RCC enable
+  RCC_GPIOX_ENABLE(RCC_LED_GPIO);
+
   // GPIO MODER
   CLEAR_GPIOX_MODER(GPIO_LED_PORT, PIN5);
   SET_GPIOX_MODER(GPIO_LED_PORT, PIN5, GENERAL_PURPOSE_OUTPUT_MODE);
@@ -63,6 +64,9 @@ static void led_init(void)
 
 static void button_init(void)
 {
+  // RCC enable
+  RCC_GPIOX_ENABLE(RCC_BUTTON_GPIO);
+
   // GPIO MODER
   CLEAR_GPIOX_MODER(GPIO_BUTTON_PORT, PIN13);
   SET_GPIOX_MODER(GPIO_BUTTON_PORT, PIN13, INPUT_RESET_STATE);

@@ -16,7 +16,7 @@ int main(void)
   BYTE u08Ret = FUNC_SUCCESS;
 
   // Enable clock
-  RCC_GPIOX_ENABLE(RCC_LED_GPIO);
+  RCC_AHB1_ENABLE(RCC_LED_GPIO);
 
   // GPIOA & Pin5 settings
   // GPIO MODER

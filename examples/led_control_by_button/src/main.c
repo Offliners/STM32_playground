@@ -44,7 +44,7 @@ int main(void)
 static void led_init(void)
 {
   // RCC enable
-  RCC_GPIOX_ENABLE(RCC_LED_GPIO);
+  RCC_AHB1_ENABLE(RCC_LED_GPIO);
 
   // GPIO MODER
   CLEAR_GPIOX_MODER(GPIO_LED_PORT, PIN5);
@@ -65,7 +65,7 @@ static void led_init(void)
 static void button_init(void)
 {
   // RCC enable
-  RCC_GPIOX_ENABLE(RCC_BUTTON_GPIO);
+  RCC_AHB1_ENABLE(RCC_BUTTON_GPIO);
 
   // GPIO MODER
   CLEAR_GPIOX_MODER(GPIO_BUTTON_PORT, PIN13);

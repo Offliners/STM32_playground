@@ -33,20 +33,20 @@ typedef enum {
 } RCC_AHB1;
 
 static const BYTE RCC_AHB1_TABLE[RCC_AHB1_END] = {
-    [RCC_GPIOA]      = 0x0,
-    [RCC_GPIOB]      = 0x1,
-    [RCC_GPIOC]      = 0x2,
-    [RCC_GPIOD]      = 0x3,
-    [RCC_GPIOE]      = 0x4,
-    [RCC_GPIOF]      = 0x5,
-    [RCC_GPIOG]      = 0x6,
-    [RCC_GPIOH]      = 0x7,
-    [RCC_CRC]        = 0x12,
-    [RCC_BKP_SRAM]   = 0x18,
-    [RCC_DMA1]       = 0x21,
-    [RCC_DMA2]       = 0x22,
-    [RCC_OTGHS]      = 0x29,
-    [RCC_OTGHS_ULPI] = 0x30
+    [RCC_GPIOA]      = 0,
+    [RCC_GPIOB]      = 1,
+    [RCC_GPIOC]      = 2,
+    [RCC_GPIOD]      = 3,
+    [RCC_GPIOE]      = 4,
+    [RCC_GPIOF]      = 5,
+    [RCC_GPIOG]      = 6,
+    [RCC_GPIOH]      = 7,
+    [RCC_CRC]        = 12,
+    [RCC_BKP_SRAM]   = 18,
+    [RCC_DMA1]       = 21,
+    [RCC_DMA2]       = 22,
+    [RCC_OTGHS]      = 29,
+    [RCC_OTGHS_ULPI] = 30
 };
 
 #define RCC_AHB1_ENABLE(clken)     WRITE_REG_LWORD(RCC, RCC_AHB1ENR_OFFSET, READ_REG_LWORD(RCC, RCC_AHB1ENR_OFFSET) | (CLK_ENABLE << RCC_AHB1_TABLE[clken]))

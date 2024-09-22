@@ -155,7 +155,7 @@ RCC_AHB1_ENABLE(RCC_LED_GPIO);
 ```
 
 ## Time Delay Function
-Adjust the delay time according to the value set in GPIOx_OSPEEDR.
+Adjust the delay time according to the value set in GPIOx_OSPEEDR. The delay time of this function is not accurate, and it will be explained in a later example.
 
 |GPIOx_OSPEEDR|Definition|Frequency|
 |-|-|-|
@@ -196,3 +196,10 @@ BYTE timer_delay(LWORD u32_time_ms, BYTE u08_ospeedr)
 
 u08Ret |= timer_delay(1000, GET_OSPEEDR(GPIO_LED_PORT, PIN5));
 ```
+
+## Logic Analyzer
+You can use D13 to measure the PA5 signal on the STM32-F446RE board.
+![D13 connector](./img/D13_layout.png)
+
+Using a logic analyzer, it can be observed that it does not toggle every second.
+![Oscilloscope](./img/D13_LA.png)

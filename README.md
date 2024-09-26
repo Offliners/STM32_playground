@@ -15,7 +15,7 @@ The repository contains some basic STM32 projects using my own library.
 * PlatformIO
 
 ## Board: NUCLEO-F446RE (STM32F446RE)
-* [Datasheet](./datasheet/stm32f446re.pdf)
+* [STM32F446RE Datasheet](./datasheet/stm32f446re.pdf)
 * [Reference Manual (RM0390)](./datasheet/RM0390_reference_manual.pdf)
 * [User Manual (UM1724)](./datasheet/UM1724_user_manual.pdf)
 * [Cortex-M4 Devices Generic User Guide](./datasheet/Cortex-M4_Devices_Generic_User_Guide.pdf)

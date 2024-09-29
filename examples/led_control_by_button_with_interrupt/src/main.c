@@ -28,6 +28,7 @@ LWORD delay_time_ms = LOW_DELAY_TIME_MS;
 static void led_init(void);
 static void button_init(void);
 static void exti_init(void);
+void exti15_10_isr(void);
 
 int main(void)
 {
@@ -93,13 +94,12 @@ static void exti_init(void)
   // NVIC trigger sourse
   SET_INTERRUPT_ENABLE(NVIC_BUTTON_IRQ);
 
-  // NVIC trigger type
+  // EXTI trigger type
   SET_EXTI_FALLING_MODE(PIN13);
 
   // EXTI IMR & EMR
   ENABLE_EXTI_INTERRUPT_AND_EVENT(PIN13);
 }
-
 
 void exti15_10_isr(void)
 {

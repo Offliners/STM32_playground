@@ -23,7 +23,7 @@
 #define LOW_DELAY_TIME_MS  (1000)
 #define FAST_DELAY_TIME_MS (200)
 
-LWORD delay_time_ms = LOW_DELAY_TIME_MS;
+LWORD gu32_delay_time_ms = LOW_DELAY_TIME_MS;
 
 static void led_init(void);
 static void button_init(void);
@@ -41,7 +41,7 @@ int main(void)
   while(1)
   {
     TOGGLE_GPIOX(GPIO_LED_PORT, PIN5);
-    u08Ret |= timer_delay(delay_time_ms, GET_OSPEEDR(GPIO_LED_PORT, PIN5));
+    u08Ret |= timer_delay(gu32_delay_time_ms, GET_OSPEEDR(GPIO_LED_PORT, PIN5));
   }
 
   return u08Ret;
@@ -107,9 +107,9 @@ void exti15_10_isr(void)
   {
     CLEAR_EXTI_FLAG_STATUS(PIN13);
 
-    if(delay_time_ms == LOW_DELAY_TIME_MS)
-      delay_time_ms = FAST_DELAY_TIME_MS;
+    if(gu32_delay_time_ms == LOW_DELAY_TIME_MS)
+      gu32_delay_time_ms = FAST_DELAY_TIME_MS;
     else
-      delay_time_ms = LOW_DELAY_TIME_MS;
+      gu32_delay_time_ms = LOW_DELAY_TIME_MS;
   }
 }

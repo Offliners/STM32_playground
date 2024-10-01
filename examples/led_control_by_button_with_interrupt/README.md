@@ -64,7 +64,7 @@ SET_SYSCFG_EXTICR4_EXTIx(PIN13, EXTI_BUTTON_PORT);
 
 ## Nested Vectored Interrupt Controller (NVIC)
 
-In the Reference Manual, we can find the EXTI13 interrupt request (IRQ) at Position 40 through the vector table. To enable this IRQ, we need to first configure the NVIC_ISERx.
+In the Reference Manual, we can find the EXTI13 interrupt request (IRQ) at Position 40 through the NVIC table. To enable this IRQ, we need to first configure the NVIC_ISERx.
 
 ![NVIC vector table](./img/NVIC_vector_table.png)
 
@@ -103,8 +103,8 @@ There are 8 NVIC_ISER (0 ~ 7) registers, each with 32 bits. Since we want to ena
 SET_INTERRUPT_ENABLE(NVIC_BUTTON_IRQ);
 ```
 
-### EXTI Trigger Type
-After enabling this IRQ, the next step is to select the trigger type. Since the user button is pressed low, the trigger should be set to falling mode. To set PIN13 to falling mode, you need to disable EXTI_RTSR and enable EXTI_FTSR.
+### EXTI_RTSR and EXTI_FTSR
+After enabling this NVIC IRQ, the next step is to select the trigger type. Since the user button is pressed low, the trigger should be set to falling mode. To set PIN13 to falling mode, we need to disable EXTI_RTSR and enable EXTI_FTSR.
 
 ![EXTI Trigger Type](./img/EXTI_RTSR_and_FTSR.png)
 
@@ -129,4 +129,62 @@ After enabling this IRQ, the next step is to select the trigger type. Since the 
 SET_EXTI_FALLING_MODE(PIN13);
 ```
 
-### 
+### EXTI_IMR and EXTI_EMR
+Next, we need to unmask the interrupt request register to enable this IRQ, so we write 1 to EXTI_IMR and EXTI_EMR.
+
+![EXTI_IMR and EXTI_EMR](./img/EXTI_IMR_and_EXTI_EMR.png)
+
+```c
+// EXTI_IMR (0x00)
+#define EXTI_IMR_OFFSET             0x00
+#define READ_EXTI_IMR()             READ_REG_LWORD(EXTI, EXTI_IMR_OFFSET)
+#define WRITE_EXTI_IMR(u32Value)    WRITE_REG_LWORD(EXTI, EXTI_IMR_OFFSET, u32Value)
+
+// EXTI_EMR (0x04)
+#define EXTI_EMR_OFFSET             0x04
+#define READ_EXTI_EMR()             READ_REG_LWORD(EXTI, EXTI_EMR_OFFSET)
+#define WRITE_EXTI_EMR(u32Value)    WRITE_REG_LWORD(EXTI, EXTI_EMR_OFFSET, u32Value)
+
+// Enable interrupt and event
+#define ENABLE_EXTI_INTERRUPT_AND_EVENT(line) {             \
+    WRITE_EXTI_IMR(READ_EXTI_IMR() | (1 << (line)));        \
+    WRITE_EXTI_EMR(READ_EXTI_EMR() | (1 << (line)));        \
+}
+
+// EXTI IMR & EMR
+ENABLE_EXTI_INTERRUPT_AND_EVENT(PIN13);
+```
+
+## Interrupt Service Routine (ISR)
+After configuring EXTI, the last step is to implement the ISR function. First, we need to check EXTI_PR to determine if an interrupt has occurred. After the interrupt occurs, we need to reset EXTI_PR to allow for the next interrupt to be detected. According to the Reference Manual, to clear this register bit, we need to write 1 to it.
+
+![EXTI_PR](./img/EXTI_PR.png)
+
+```c
+// EXTI_FTSR (0x14)
+#define EXTI_PR_OFFSET              0x14
+#define READ_EXTI_PR()              READ_REG_LWORD(EXTI, EXTI_PR_OFFSET)
+#define WRITE_EXTI_PR(u32Value)     WRITE_REG_LWORD(EXTI, EXTI_PR_OFFSET, u32Value)
+
+// Check the EXTI flag set by EXTI interrupt
+#define GET_EXTI_FLAG_STATUS(line)      (READ_EXTI_PR() & (1 << line))
+
+// Clear the EXTI flag
+#define CLEAR_EXTI_FLAG_STATUS(line)    (WRITE_EXTI_PR((1 << line)))
+```
+
+Finally, complete the ISR function so that each time the user button is pressed, the LED blink frequency will change.
+```c
+void exti15_10_isr(void)
+{
+  if(GET_EXTI_FLAG_STATUS(PIN13))
+  {
+    CLEAR_EXTI_FLAG_STATUS(PIN13);
+
+    if(delay_time_ms == LOW_DELAY_TIME_MS)
+      delay_time_ms = FAST_DELAY_TIME_MS;
+    else
+      delay_time_ms = LOW_DELAY_TIME_MS;
+  }
+}
+```

@@ -5,7 +5,7 @@ The repository contains some basic STM32 projects using my own library.
 * [Example 1 - Led Blink](./examples/led_blink/README.md)
 * [Example 2 - Led Control by Button](./examples/led_control_by_button/README.md)
 * [Example 3 - Led Control by Button with Interrupt](./examples/led_control_by_button_with_interrupt/README.md)
-* Example 4 - Clock Tree
+* [Example 4 - Clock Tree](./examples/clock_tree/README.md)
 * Example 5 - UART Transmitter
 * Example 6 - UART Receiver
 * Example 7 - UART Loopback Test

@@ -173,7 +173,7 @@ After configuring EXTI, the last step is to implement the ISR function. First, w
 #define CLEAR_EXTI_FLAG_STATUS(line)    (WRITE_EXTI_PR((1 << line)))
 ```
 
-Finally, complete the ISR function so that each time the user button is pressed, the LED blink frequency will change. The ISR function declaration must be "void exti15_10_isr(void)" because we are still based on the libopencm3 framework. The interrupt function pointer addresses are defined in the startup file, so we must use this declaration to override the function.
+Finally, complete the ISR function so that each time the user button is pressed, the LED blink frequency will change. The ISR function declaration for EXTI15_10 must be `void exti15_10_isr(void)` because we are still based on the libopencm3 framework. The interrupt function pointer addresses are defined in the startup file, so we must use this declaration to override the function.
 ```c
 void exti15_10_isr(void)
 {
@@ -190,3 +190,8 @@ void exti15_10_isr(void)
 ```
 
 For more detail about other ISR function prototypes, you can refer to this [link](http://libopencm3.org/docs/latest/stm32f4/html/group__CM3__nvic__isrprototypes__STM32F4.html).
+
+## Logic Analyzer Measurement
+You can use D13 to measure the PA5 signal on the STM32-F446RE board. When the button is pressed, it triggers EXTI to change the LED blink time.
+
+![Logic Analyzer Measurement](./img/LA_measurement.png)

@@ -197,7 +197,7 @@ BYTE timer_delay(LWORD u32_time_ms, BYTE u08_ospeedr)
 u08Ret |= timer_delay(1000, GET_OSPEEDR(GPIO_LED_PORT, PIN5));
 ```
 
-## Logic Analyzer
+## Logic Analyzer Measurement
 You can use D13 to measure the PA5 signal on the STM32-F446RE board.
 ![D13 connector](./img/D13_layout.png)
 

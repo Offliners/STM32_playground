@@ -73,6 +73,8 @@ The NVIC registers are located in the Cortex M4 Internal Peripherals, so we need
 
 ![NVIC address](./img/NVIC_addr.png)
 
+![NVIC address offset](./img/NVIC_ISERx_offset.png)
+
 ```c
 // Cortex M4 Internal Peripherals
 #define CORTEX_M4_INTERNAL_PERIPHERALS  (0xE0000000)
